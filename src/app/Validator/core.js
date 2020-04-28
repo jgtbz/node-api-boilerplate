@@ -1,3 +1,5 @@
+import { onError } from '../../app/MongoDBControllers/Responses'
+
 export default (instance, validators) => (req, _, next) => {
   const reqInstance = req[instance]
 
@@ -21,10 +23,11 @@ export default (instance, validators) => (req, _, next) => {
   const hasError = !!Object.keys(errors).length
 
   if (hasError) {
-    const onErrorMessage = onActivateDeactivateError(responseConfig)
-    const errorResponse = onError({ status: 403, message, err, res })
+    const errorResponse = onError({ status: 403, message: 'Dados inválidos', err: errors, res })
 
-    res.status(403).send(errorResponse)
+    console.log(errorResponse)
+
+    return res.status(403).send(errorResponse)
   }
 
   next()

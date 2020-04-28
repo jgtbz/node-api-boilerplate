@@ -1,4 +1,5 @@
 import validators from '../validators'
+import { messages } from '../../../support/validators'
 
 export default {
   name: {
